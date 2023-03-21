@@ -1,16 +1,15 @@
-[food-app]
+## food-app
 
-## api
-
+[api]
     - laravel@10
 
-## infrastructure
+[infrastructure]
 
     - docker
     - postgresql@15
     - redis@7
     - nginx@latest
 
-## app
+[app]
 
     - react-native with expo@47
