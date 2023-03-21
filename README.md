@@ -1,6 +1,7 @@
 ## food-app
 
 [api]
+
     - laravel@10
 
 [infrastructure]
