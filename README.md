@@ -1,9 +1,5 @@
 ## food-app
 
-[api]
-
-    - laravel@10
-
 [infrastructure]
 
     - docker
@@ -11,6 +7,11 @@
     - redis@7
     - nginx@latest
 
+[api]
+    
+    - laravel@10
+
 [app]
 
     - react-native with expo@47
+    - typescript
