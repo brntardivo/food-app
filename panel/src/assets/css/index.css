@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gradient-to-tl to-black/95 from-slate-800/95 h-screen overflow-hidden;
+  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  @apply transition-opacity ease-in-out delay-100;
+}
+
+.fast-fade-enter-active,
+.fast-fade-leave-active {
+  @apply transition-opacity ease-in-out delay-[50ms];
+}
+
+.fade-enter-from,
+.fade-leave-to,
+.fast-fade-enter-from,
+.fast-fade-leave-to {
+  @apply opacity-0;
+}
+
+#toast-container {
+  @apply fixed z-10 p-2;
+
+  & .toast {
+    @apply relative flex flex-col items-start bg-white p-4 mb-2 rounded-md border border-zinc-100 shadow opacity-0 max-w-sm min-w-[18rem];
+
+    &.toast-icon {
+      @apply pl-14;
+
+      & img.toast-icon-container {
+        transform: translateY(-50%);
+        @apply absolute top-1/2 left-4 h-6 w-6 text-green-600;
+      }
+    }
+
+    &.fade {
+      @apply transition-all delay-100 ease-linear;
+    }
+
+    &.show {
+      @apply opacity-100;
+    }
+
+    & .toast-header {
+      @apply flex flex-row w-full justify-between items-center text-sm font-medium;
+    }
+    & .toast-body {
+      @apply text-sm font-normal text-zinc-500 pr-4;
+    }
+
+    & .btn-close {
+      background: url("@assets/images/close_icon.svg") center no-repeat;
+      @apply w-4 h-4 absolute top-4 right-4;
+    }
+  }
+
+  &.toast-position-top-right {
+    @apply top-0 right-0;
+  }
+
+  &.toast-position-top-center {
+    transform: translate(-50%, 0);
+    @apply top-0 left-1/2;
+  }
+
+  &.toast-position-top-left {
+    @apply top-0 left-0;
+  }
+
+  &.toast-position-bottom-right {
+    @apply bottom-0 right-0;
+  }
+
+  &.toast-position-bottom-center {
+    transform: translate(-50%, 0);
+    @apply left-1/2 bottom-0;
+  }
+
+  &.toast-position-bottom-left {
+    @apply left-0 bottom-0;
+  }
+}

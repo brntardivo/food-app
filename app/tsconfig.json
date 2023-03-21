@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "isolatedModules": true,
@@ -18,10 +19,10 @@
       "@components/*": ["./src/components/*"],
       "@database/*": ["./src/database/*"],
       "@entities/*": ["./src/entities/*"],
-      "@config/*": ["./src/config/*"],
+      "@settings/*": ["./src/settings/*"],
       "@providers/*": ["./src/providers/*"],
       "@interfaces/*": ["./src/interfaces/*"],
-      "@model/*": ["./src/model/*"],
+      "@i18n/*": ["./src/i18n/*"],
       "@repositories/*": ["./src/repositories/*"],
       "@routes/*": ["./src/routes/*"],
       "@screens/*": ["./src/screens/*"],
