@@ -15,3 +15,8 @@
 
     - react-native with expo@47
     - typescript
+    
+[panel]
+    
+    - vue@3
+    - typescript
