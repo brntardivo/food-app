@@ -1,0 +1,78 @@
+version: "3.9"
+services:
+  database:
+    image: postgres:15
+    container_name: food-database
+    restart: always
+    networks:
+      - food
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=food
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database/data:/var/lib/postgresql/data
+  cache:
+    image: redis:7-alpine
+    container_name: food-cache
+    restart: "unless-stopped"
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass foodcache
+    volumes:
+      - ./cache/data:/data
+    networks:
+      - food
+  api:
+    build:
+      args:
+        user: food
+        uid: 1000
+      context: ./php
+      dockerfile: Dockerfile
+    image: food-php
+    container_name: food-api
+    restart: unless-stopped
+    volumes:
+      - ../api:/var/www/html/food-api
+    working_dir: /var/www/html/food-api
+    expose:
+      - 9000
+    networks:
+      - food
+    depends_on:
+      - cache
+      - database
+
+  web:
+    image: nginx:alpine
+    container_name: food-web
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ../api:/var/www/html/food-api
+      - ./nginx:/etc/nginx/conf.d
+    links:
+      - "api"
+    networks:
+      - food
+  queues:
+    restart: unless-stopped
+    image: food-php
+    container_name: food-queues
+    volumes:
+      - ../api:/var/www/html/food-api
+    working_dir: /var/www/html/food-api
+    command: ["php", "artisan", "queue:work", "--queue=default"]
+    networks:
+      - food
+    depends_on:
+      - database
+      - api
+      - cache
+networks:
+  food:
+    driver: bridge
