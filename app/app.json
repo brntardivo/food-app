@@ -1,13 +1,37 @@
 {
   "expo": {
-    "name": "app",
+    "name": "TheFoodApp",
     "slug": "app",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "orientation": "portrait",
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "bundleIdentifier": "com.food.app",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.food.app",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#FFFFFF"
+      },
+      "permissions": [
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "VIBRATE",
+        "ACCESS_WIFI_STATE",
+        "ACCESS_NETWORK_STATE"
+      ]
+    },
     "plugins": [
-      "expo-build-properties"
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "enableProguardInReleaseBuilds": true
+          }
+        }
+      ]
     ]
   }
 }
