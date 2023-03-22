@@ -1,22 +1,22 @@
-## food-app
+## FOOD-APP
 
-[infrastructure]
+### infrastructure
 
     - docker
     - postgresql@15
     - redis@7
     - nginx@latest
 
-[api]
-    
+### api
+
     - laravel@10
 
-[app]
+### app
 
     - react-native with expo@47
     - typescript
-    
-[panel]
-    
+
+### panel
+
     - vue@3
     - typescript

@@ -11,17 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->uuid('id');
             $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->foreignUuid('role_area_id')->references('id')->on('role_areas');
             $table->softDeletes();
             $table->timestamps();
-
-            $table->index(['name', 'email']);
         });
     }
 
@@ -30,6 +25,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::table('roles', function(Blueprint $table) {
+            $table->dropForeign(['role_area_id']);
+        });
+
+        Schema::dropIfExists('roles');
     }
 };
