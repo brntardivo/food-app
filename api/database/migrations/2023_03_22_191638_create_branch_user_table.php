@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('role_id')->references('id')->on('roles');
             $table->foreignUuid('branch_id')->references('id')->on('branches');
+            $table->foreignUuid('user_id')->references('id')->on('users');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -28,6 +29,7 @@ return new class extends Migration
         Schema::table('branch_user', function(Blueprint $table) {
             $table->dropForeign(['role_id']);
             $table->dropForeign(['branch_id']);
+            $table->dropForeign(['user_id']);
         });
 
         Schema::dropIfExists('branch_user');

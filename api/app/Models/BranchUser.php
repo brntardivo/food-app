@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Branch;
 use App\Models\User;
 use App\Models\Role;
@@ -13,19 +14,21 @@ use App\Models\Role;
 class BranchUser extends Model
 {
     use HasFactory, HasUuids, SoftDeletes;
+
+    protected $table = 'branch_user';
     
-    public function user(): HasOne
+    public function user(): BelongsTo
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
-    public function branch(): HasOne
+    public function branch(): BelongsTo
     {
-        return $this->hasOne(Branch::class);
+        return $this->belongsTo(Branch::class);
     }
 
-    public function role(): HasOne 
+    public function role(): BelongsTo 
     {
-        return $this->hasOne(Role::class);
+        return $this->belongsTo(Role::class);
     }
 }

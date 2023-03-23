@@ -26,7 +26,7 @@ return new class extends Migration
     {
         Schema::table('parameter_product', function(Blueprint $table) {
             $table->dropForeign(['product_parameter_id']);
-            $table->dropForeign(['parameter_id']);
+            $table->dropForeign(['product_id']);
         });
 
         Schema::dropIfExists('parameter_product');
