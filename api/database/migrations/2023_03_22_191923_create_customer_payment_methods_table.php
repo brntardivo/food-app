@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('customer_payment_methods', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->foreignUuid('customer_id')->references('id')->on('customers');
             $table->string('tokenized_card')->unique();
             $table->enum('type', ['CREDIT', 'DEBIT', 'BOTH']);

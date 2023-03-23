@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('permission_role', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->foreignUuid('permission_id')->references('id')->on('permissions');
             $table->foreignUuid('user_id')->references('id')->on('users');
             $table->timestamps();
@@ -25,7 +25,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('permission_role', function(Blueprint $table) {
-            $table->dropForeign(['permission_id', 'user_id']);
+            $table->dropForeign(['permission_id']);
+            $table->dropForeign(['user_id']);
         });
 
         Schema::dropIfExists('permission_role');

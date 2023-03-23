@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('roles', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->string('name');
-            $table->foreignUuid('role_area_id')->references('id')->on('role_areas');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -25,10 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('roles', function(Blueprint $table) {
-            $table->dropForeign(['role_area_id']);
-        });
-
         Schema::dropIfExists('roles');
     }
 };

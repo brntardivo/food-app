@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('branch_addresses', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->foreignUuid('branch_id')->references('id')->on('branches');
             $table->string('address');
             $table->string('complement')->nullable();

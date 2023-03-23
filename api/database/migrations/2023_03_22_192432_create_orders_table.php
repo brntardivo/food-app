@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->string('slug')->unique();
             $table->foreignUuid('branch_id')->references('id')->on('branches');
             $table->foreignUuid('customer_id')->references('id')->on('customers');
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->boolean('paid');
             $table->enum('payment_type', ['MANUAL', 'ONLINE']);
             $table->enum('delivery_type', ['TAKE_AWAY', 'DELIVERY']);
-            $table->foreignUuid('coupon_id')->nullable()->references('id')->on('coupon');
+            $table->foreignUuid('coupom_id')->nullable()->references('id')->on('coupoms');
             $table->decimal('total_price', 8, 2);
             $table->softDeletes();
             $table->timestamps();
@@ -35,7 +35,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('orders', function(Blueprint $table) {
-            $table->dropForeign(['customer_id', 'coupon_id', 'branch_id']);
+            $table->dropForeign(['customer_id']);
+            $table->dropForeign(['coupom_id']);
+            $table->dropForeign(['branch_id']);
         });
 
         Schema::dropIfExists('orders');

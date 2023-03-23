@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('coupoms', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->string('slug')->unique();
             $table->boolean('enabled');
             $table->integer('quantity');

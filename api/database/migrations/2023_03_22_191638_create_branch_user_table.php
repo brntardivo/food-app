@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('branch_user', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->foreignUuid('role_id')->references('id')->on('roles');
             $table->foreignUuid('branch_id')->references('id')->on('branches');
             $table->softDeletes();
@@ -26,7 +26,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('branch_user', function(Blueprint $table) {
-            $table->dropForeign(['role_id', 'branch_id']);
+            $table->dropForeign(['role_id']);
+            $table->dropForeign(['branch_id']);
         });
 
         Schema::dropIfExists('branch_user');

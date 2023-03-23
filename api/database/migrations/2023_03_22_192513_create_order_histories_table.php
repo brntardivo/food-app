@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('order_histories', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->foreignUuid('order_id')->references('id')->on('orders');
             $table->string('event');
             $table->json('meta')->nullable();

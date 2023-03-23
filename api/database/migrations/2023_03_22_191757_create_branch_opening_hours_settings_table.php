@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('branch_opening_hours_settings', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->foreignUuid('branch_id')->references('id')->on('branches');
             $table->time('opens_at');
             $table->time('closes_at');

@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('parameter_product', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->foreignUuid('parameter_id')->references('id')->on('parameters');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('product_parameter_id')->references('id')->on('product_parameters');
             $table->foreignUuid('product_id')->references('id')->on('products');
             $table->timestamps();
         });
@@ -25,7 +25,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('parameter_product', function(Blueprint $table) {
-            $table->dropForeign(['parameter_id', 'product_id']);
+            $table->dropForeign(['product_parameter_id']);
+            $table->dropForeign(['parameter_id']);
         });
 
         Schema::dropIfExists('parameter_product');

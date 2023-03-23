@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('order_products', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->foreignUuid('order_id')->references('id')->on('orders');
             $table->foreignUuid('product_id')->references('id')->on('products');
             $table->decimal('price', 8, 2);
@@ -29,7 +29,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('order_products', function(Blueprint $table) {
-            $table->dropForeign(['order_id', 'product_id']);
+            $table->dropForeign(['order_id']);
+            $table->dropForeign(['product_id']);
         });
 
         Schema::dropIfExists('order_products');
