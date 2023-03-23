@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('parameter_product', function (Blueprint $table) {
+        Schema::create('permission_role', function (Blueprint $table) {
             $table->uuid('id');
-            $table->foreignUuid('parameter_id')->references('id')->on('parameters');
-            $table->foreignUuid('product_id')->references('id')->on('products');
+            $table->foreignUuid('permission_id')->references('id')->on('permissions');
+            $table->foreignUuid('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -24,10 +24,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('parameter_product', function(Blueprint $table) {
-            $table->dropForeign(['parameter_id', 'product_id']);
+        Schema::table('permission_role', function(Blueprint $table) {
+            $table->dropForeign(['permission_id', 'user_id']);
         });
 
-        Schema::dropIfExists('parameter_product');
+        Schema::dropIfExists('permission_role');
     }
 };

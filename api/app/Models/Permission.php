@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Permission;
 use App\Models\PermissionRole;
+use App\Models\Role;
 
-class Role extends Model
+class Permission extends Model
 {
     use HasFactory, HasUuids, SoftDeletes;
 
@@ -20,12 +20,13 @@ class Role extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name'
+        'name',
+        'slug'
     ];
 
-    public function permissions(): BelongsToMany
+    public function roles(): BelongsToMany
     {
-        return $this->belongsToMany(Permission::class)
+        return $this->belongsToMany(Role::class)
             ->using(PermissionRole::class);
     }
 }

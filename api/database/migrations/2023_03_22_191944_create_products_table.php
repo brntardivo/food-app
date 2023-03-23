@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
-            $table->decimal('price', 8, 2);
+            $table->decimal('price', 8, 2)->nullable();
             $table->decimal('promotional_price', 8, 2)->nullable();
-            $table->enum('type', ['PRODUCT', 'PARAMETER']);
+            $table->enum('type', ['PRODUCT', 'PARAMETER_WITH_PRICE', 'PARAMETER_WITHOUT_PRICE']);
             $table->timestamps();
             $table->softDeletes();
 

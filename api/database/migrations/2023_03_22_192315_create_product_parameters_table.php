@@ -19,6 +19,7 @@ return new class extends Migration
             $table->boolean('required');
             $table->integer('min')->nullable();
             $table->integer('max')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

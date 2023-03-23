@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('order_histories', function (Blueprint $table) {
             $table->uuid('id');
+            $table->foreignUuid('order_id')->references('id')->on('orders');
+            $table->string('event');
+            $table->json('meta')->nullable();
             $table->timestamps();
         });
     }
@@ -22,6 +25,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('order_histories', function(Blueprint $table) {
+            $table->dropForeign(['order_id']);
+        });
+
         Schema::dropIfExists('order_histories');
     }
 };

@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('order_delivery_attempts', function (Blueprint $table) {
             $table->uuid('id');
+            $table->integer('attempt');
+            $table->enum('status', ['DELIVERED','NO_RECEIVED','ADDRESS_NOT_FOUND']);
+            $table->foreignUuid('order_id')->references('id')->on('orders');
+            $table->foreignUuid('user_id')->references('id')->on('users');
+            $table->text('observation');
+            $table->json('meta')->nullable();
             $table->timestamps();
         });
     }
@@ -22,6 +28,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('order_delivery_attempts', function(Blueprint $table) {
+            $table->dropForeign(['order_id', 'user_id']);
+        });
+
         Schema::dropIfExists('order_delivery_attempts');
     }
 };
