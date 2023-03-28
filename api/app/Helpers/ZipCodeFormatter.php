@@ -4,9 +4,9 @@ namespace App\Helpers;
 
 class ZipCodeFormatter
 {
-    public static function validate(string $value): bool 
+    public static function validate(string $value): bool
     {
-        $zip_code        = self::parse($value);
+        $zip_code = self::parse($value);
 
         return strlen($zip_code) === 8;
     }
@@ -18,12 +18,11 @@ class ZipCodeFormatter
 
     public static function format(string $value): string
     {
-        if(self::validate($value))
-        {
+        if (self::validate($value)) {
             // #####-###
-            $formatted  = substr( $value, 0, 5 ) . '-';
-            $formatted .= substr( $value, 5, 3 ) . '';
-            
+            $formatted = substr($value, 0, 5).'-';
+            $formatted .= substr($value, 5, 3).'';
+
             return $formatted;
         }
 

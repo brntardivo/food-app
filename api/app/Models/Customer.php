@@ -2,19 +2,15 @@
 
 namespace App\Models;
 
+use App\Helpers\PhoneFormatter;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Helpers\PhoneFormatter;
-use App\Models\Order;
-use App\Models\CustomerAddress;
-use App\Models\CustomerPaymentMethod;
 
 class Customer extends Authenticatable
 {
@@ -49,14 +45,14 @@ class Customer extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'phone_verified_at' => 'datetime'
+        'phone_verified_at' => 'datetime',
     ];
 
     protected function phone(): Attribute
     {
         return Attribute::make(
-            get: fn(string $value) => PhoneFormatter::format($value),
-            set: fn(string $value) => PhoneFormatter::parse($value),
+            get: fn (string $value) => PhoneFormatter::format($value),
+            set: fn (string $value) => PhoneFormatter::parse($value),
         );
     }
 

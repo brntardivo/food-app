@@ -2,14 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Models\Order;
-use App\Models\Product;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OrderProduct extends Model
 {
@@ -23,7 +21,7 @@ class OrderProduct extends Model
     protected $fillable = [
         'price',
         'quantity',
-        'parameters'
+        'parameters',
     ];
 
     /**
@@ -32,7 +30,7 @@ class OrderProduct extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'parameters'    => AsArrayObject::class
+        'parameters' => AsArrayObject::class,
     ];
 
     public function order(): BelongsTo

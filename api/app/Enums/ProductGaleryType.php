@@ -1,6 +1,7 @@
 <?php
 
-enum ProductGaleryType {
+enum ProductGaleryType
+{
     case VIDEO;
     case IMAGE;
 }

@@ -2,15 +2,13 @@
 
 namespace App\Models;
 
+use App\Enums\CustomerPaymentMethodType;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Customer;
-use App\Models\OrderPaymentAttempt;
-use App\Enums\CustomerPaymentMethodType;
 
 class CustomerPaymentMethod extends Model
 {
@@ -28,7 +26,7 @@ class CustomerPaymentMethod extends Model
         'name',
         'owner_document',
         'expiration',
-        'default'
+        'default',
     ];
 
     /**
@@ -37,16 +35,14 @@ class CustomerPaymentMethod extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'type'          => CustomerPaymentMethodType::class,
+        'type' => CustomerPaymentMethodType::class,
     ];
 
     protected function ownerDocument(): Attribute
     {
         return Attribute::make(
-            get: function(string $value) {
-                
-                switch(strlen($value))
-                {
+            get: function (string $value) {
+                switch(strlen($value)) {
                     case 14:
                         return CNPJFormatter::format($value);
                     case 11:
@@ -55,17 +51,15 @@ class CustomerPaymentMethod extends Model
                         return $value;
                 }
             },
-            set: function(string $value) {
-
-                switch(strlen($value))
-                {
+            set: function (string $value) {
+                switch(strlen($value)) {
                     case 18:
                         return CNPJFormatter::parse($value);
                     case 14:
                         return CPFFormatter::parse($value);
                     default:
                         return $value;
-                }                
+                }
             }
         );
     }

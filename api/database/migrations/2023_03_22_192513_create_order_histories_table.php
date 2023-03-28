@@ -25,7 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('order_histories', function(Blueprint $table) {
+        Schema::table('order_histories', function (Blueprint $table) {
             $table->dropForeign(['order_id']);
         });
 

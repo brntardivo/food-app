@@ -1,5 +1,5 @@
 <?php
 
-enum OrderHistoryEvent {
-    
+enum OrderHistoryEvent
+{
 }

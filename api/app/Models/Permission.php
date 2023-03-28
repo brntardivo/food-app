@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\PermissionRole;
-use App\Models\Role;
 
 class Permission extends Model
 {
@@ -21,7 +19,7 @@ class Permission extends Model
      */
     protected $fillable = [
         'name',
-        'slug'
+        'slug',
     ];
 
     public function roles(): BelongsToMany

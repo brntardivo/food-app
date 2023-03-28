@@ -1,6 +1,7 @@
 <?php
 
-enum CoupomType {
+enum CoupomType
+{
     case PERCENTAGE;
     case VALUE;
 }

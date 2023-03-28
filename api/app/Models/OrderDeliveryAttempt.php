@@ -2,14 +2,12 @@
 
 namespace App\Models;
 
+use App\Enums\OrderDeliveryAttemptStatus;
+use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Enums\OrderDeliveryAttemptStatus;
-use Illuminate\Database\Eloquent\Casts\AsArrayObject;
-use App\Models\User;
-use App\Models\Order;
 
 class OrderDeliveryAttempt extends Model
 {
@@ -24,7 +22,7 @@ class OrderDeliveryAttempt extends Model
         'attempt',
         'status',
         'observation',
-        'meta'
+        'meta',
     ];
 
     /**
@@ -33,8 +31,8 @@ class OrderDeliveryAttempt extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'status'    => OrderDeliveryAttemptStatus::class,
-        'meta'      => AsArrayObject::class
+        'status' => OrderDeliveryAttemptStatus::class,
+        'meta' => AsArrayObject::class,
     ];
 
     public function order(): BelongsTo

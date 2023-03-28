@@ -1,6 +1,7 @@
 <?php
 
-enum CustomerPaymentMethodType {
+enum CustomerPaymentMethodType
+{
     case CREDIT;
     case DEBIT;
     case BOTH;

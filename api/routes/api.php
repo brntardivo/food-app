@@ -1,6 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Management\BranchAddressController;
+use App\Http\Controllers\Management\BranchController;
+use App\Http\Controllers\Management\BranchOpeningHoursSettingController;
+use App\Http\Controllers\Management\SignInController as ManagementSignInController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +17,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('app')->group(function () {
+    Route::middleware('auth:customer')->group(function () {
+    });
+});
+
+Route::prefix('management')->group(function () {
+    Route::post('/sign-in', ManagementSignInController::class);
+
+    Route::middleware(['auth:user'])->group(function () {
+        Route::apiResource('branches', BranchController::class);
+        Route::apiSingleton('branches.address', BranchAddressController::class)->creatable();
+        Route::apiResource('branches.opening-hours', BranchOpeningHoursSettingController::class);
+    });
 });

@@ -1,6 +1,7 @@
-<?php 
+<?php
 
-enum OrderOverallStatus {
+enum OrderOverallStatus
+{
     case WAITING_ACCEPT;
     case PREPARING;
     case READY_FOR_DELIVERY;

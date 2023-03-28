@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->foreignUuid('branch_id')->references('id')->on('branches');
             $table->foreignUuid('customer_id')->references('id')->on('customers');
-            $table->enum('overall_status', ['WAITING_ACCEPT','PREPARING','READY_FOR_DELIVERY','DELIVERED','CANCELLED']);
+            $table->enum('overall_status', ['WAITING_ACCEPT', 'PREPARING', 'READY_FOR_DELIVERY', 'DELIVERED', 'CANCELLED']);
             $table->boolean('paid');
             $table->enum('payment_type', ['MANUAL', 'ONLINE']);
             $table->enum('delivery_type', ['TAKE_AWAY', 'DELIVERY']);
@@ -34,7 +34,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('orders', function(Blueprint $table) {
+        Schema::table('orders', function (Blueprint $table) {
             $table->dropForeign(['customer_id']);
             $table->dropForeign(['coupom_id']);
             $table->dropForeign(['branch_id']);

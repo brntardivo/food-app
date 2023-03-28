@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
+use App\Enums\CoupomType;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Enums\CoupomType;
-use App\Models\Order;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Coupom extends Model
 {
@@ -27,7 +26,7 @@ class Coupom extends Model
         'price',
         'percentage',
         'available_in',
-        'expires_in'
+        'expires_in',
     ];
 
     /**
@@ -36,12 +35,13 @@ class Coupom extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'type'          => CoupomType::class,
-        'available_in'  => 'datetime',
-        'expires_in'    => 'datetime'
+        'type' => CoupomType::class,
+        'available_in' => 'datetime',
+        'expires_in' => 'datetime',
     ];
 
-    public function orders(): HasMany {
+    public function orders(): HasMany
+    {
         return $this->hasMany(Order::class);
     }
 }

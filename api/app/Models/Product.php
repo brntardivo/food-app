@@ -2,15 +2,13 @@
 
 namespace App\Models;
 
+use App\Enums\ProductType;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Models\ProductGalery;
-use App\Models\ProductParameter;
-use App\Enums\ProductType;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
@@ -27,7 +25,7 @@ class Product extends Model
         'price',
         'description',
         'promotional_price',
-        'type'
+        'type',
     ];
 
     /**
@@ -36,7 +34,7 @@ class Product extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'type'    => ProductType::class
+        'type' => ProductType::class,
     ];
 
     public function category(): BelongsTo

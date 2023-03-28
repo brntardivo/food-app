@@ -23,7 +23,6 @@ return new class extends Migration
             $table->boolean('default');
             $table->softDeletes();
             $table->timestamps();
-
         });
     }
 
@@ -32,7 +31,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('customer_payment_methods', function(Blueprint $table) {
+        Schema::table('customer_payment_methods', function (Blueprint $table) {
             $table->dropForeign(['customer_id']);
         });
 

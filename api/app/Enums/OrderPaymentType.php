@@ -1,6 +1,7 @@
 <?php
 
-enum OrderPaymentType {
+enum OrderPaymentType
+{
     case MANUAL;
     case ONLINE;
 }

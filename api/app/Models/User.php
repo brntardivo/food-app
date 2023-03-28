@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\BranchUser;
-use App\Models\OrderDeliveryAttempt;
 
 class User extends Authenticatable
 {
@@ -45,12 +43,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function employments(): HasMany 
+    public function employments(): HasMany
     {
         return $this->hasMany(BranchUser::class);
     }
 
-    public function delivery_attempts(): HasMany 
+    public function delivery_attempts(): HasMany
     {
         return $this->hasMany(OrderDeliveryAttempt::class);
     }

@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
+use App\Helpers\ZipCodeFormatter;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Helpers\ZipCodeFormatter;
-use App\Models\Branch;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BranchAddress extends Model
 {
@@ -32,12 +31,13 @@ class BranchAddress extends Model
     protected function zipCode(): Attribute
     {
         return Attribute::make(
-            get: fn(string $value) => ZipCodeFormatter::format($value),
-            set: fn(string $value) => ZipCodeFormatter::parse($value),
+            get: fn (string $value) => ZipCodeFormatter::format($value),
+            set: fn (string $value) => ZipCodeFormatter::parse($value),
         );
     }
 
-    public function branch(): BelongsTo {
+    public function branch(): BelongsTo
+    {
         return $this->belongsTo(Branch::class);
     }
 }

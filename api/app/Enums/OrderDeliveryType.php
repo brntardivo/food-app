@@ -1,6 +1,7 @@
 <?php
 
-enum OrderDeliveryType {
+enum OrderDeliveryType
+{
     case TAKE_AWAY;
     case DELIVERY;
 }

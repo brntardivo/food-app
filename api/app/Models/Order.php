@@ -2,21 +2,15 @@
 
 namespace App\Models;
 
+use App\Enums\OrderDeliveryStatus;
+use App\Enums\OrderOverallStatus;
+use App\Enums\OrderPaymentType;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Enums\OrderOverallStatus;
-use App\Enums\OrderPaymentType;
-use App\Enums\OrderDeliveryStatus;
-use App\Models\OrderProduct;
-use App\Models\OrderHistory;
-use App\Models\OrderDeliveryAttempt;
-use App\Models\OrderPaymentAttempt;
-use App\Models\Customer;
-use App\Models\Branch;
 
 class Order extends Model
 {
@@ -33,7 +27,7 @@ class Order extends Model
         'payment_type',
         'delivery_type',
         'paid',
-        'total_price'
+        'total_price',
     ];
 
     /**
@@ -42,9 +36,9 @@ class Order extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'overall_status'  => OrderOverallStatus::class,
-        'payment_type'    => OrderPaymentType::class,
-        'delivery_type'   => OrderDeliveryStatus::class,
+        'overall_status' => OrderOverallStatus::class,
+        'payment_type' => OrderPaymentType::class,
+        'delivery_type' => OrderDeliveryStatus::class,
     ];
 
     public function products(): HasMany

@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
+use App\Enums\ProductGaleryType;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Product;
-use App\Enums\ProductGaleryType;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProductGalery extends Model
 {
@@ -31,9 +30,8 @@ class ProductGalery extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'type'    => ProductGaleryType::class
+        'type' => ProductGaleryType::class,
     ];
-
 
     public function product(): BelongsTo
     {

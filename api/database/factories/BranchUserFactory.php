@@ -2,11 +2,12 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\BranchUser;
 use App\Models\Branch;
-use App\Models\User;
+use App\Models\BranchUser;
 use App\Models\Role;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\BranchUser>
  */
@@ -24,7 +25,7 @@ class BranchUserFactory extends Factory
         return [
             'branch_id' => Branch::factory(),
             'user_id' => User::factory(),
-            'role_id' => Role::factory(),            
+            'role_id' => Role::factory(),
         ];
     }
 }
