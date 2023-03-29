@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Management;
 
+use App\Rules\DocumentRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateBranchRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class UpdateBranchRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,10 @@ class UpdateBranchRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required',
+            'trading_name' => 'required',
+            'company_name' => 'required',
+            'document' => ['required', 'string', Rule::unique('branches')->ignore($this->branch->id), new DocumentRule],
         ];
     }
 }

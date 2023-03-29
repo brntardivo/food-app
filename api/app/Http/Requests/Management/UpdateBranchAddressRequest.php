@@ -11,7 +11,7 @@ class UpdateBranchAddressRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class UpdateBranchAddressRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'address' => 'required|string',
+            'complement' => 'nullable|string',
+            'zip_code' => 'required|string|min:8|max:9',
+            'district' => 'required|string',
+            'city' => 'required|string',
+            'state' => 'required|size:2',
         ];
     }
 }

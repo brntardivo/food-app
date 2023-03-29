@@ -11,7 +11,7 @@ class UpdateBranchOpeningHoursSettingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdateBranchOpeningHoursSettingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'weekday' => 'required|integer|between:0,6',
+            'opens_at' => 'required|date_format:H:i|before:closes_at',
+            'closes_at' => 'required|date_format:H:i',
         ];
     }
 }

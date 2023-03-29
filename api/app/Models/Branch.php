@@ -42,7 +42,7 @@ class Branch extends Model
 
     public function opening_hours_settings(): HasMany
     {
-        return $this->hasMany(BranchOpeningHoursSettings::class);
+        return $this->hasMany(BranchOpeningHoursSetting::class);
     }
 
     public function employees(): HasMany

@@ -14,7 +14,11 @@ class BranchController extends Controller
      */
     public function index()
     {
-        //
+        $branches = Branch::all();
+
+        return response()->json([
+            'branches' => $branches,
+        ]);
     }
 
     /**
@@ -22,7 +26,17 @@ class BranchController extends Controller
      */
     public function store(StoreBranchRequest $request)
     {
-        //
+        $branch = new Branch;
+        $branch->name = $request->name;
+        $branch->trading_name = $request->trading_name;
+        $branch->company_name = $request->company_name;
+        $branch->document = $request->document;
+
+        $branch->save();
+
+        return response()->json([
+            'id' => $branch->id,
+        ], 201);
     }
 
     /**
@@ -30,7 +44,11 @@ class BranchController extends Controller
      */
     public function show(Branch $branch)
     {
-        //
+        $branch->load(['address', 'opening_hours_settings']);
+
+        return response()->json([
+            'branch' => $branch,
+        ], 200);
     }
 
     /**
@@ -38,7 +56,14 @@ class BranchController extends Controller
      */
     public function update(UpdateBranchRequest $request, Branch $branch)
     {
-        //
+        $branch->name = $request->name;
+        $branch->trading_name = $request->trading_name;
+        $branch->company_name = $request->company_name;
+        $branch->document = $request->document;
+
+        $branch->save();
+
+        return response()->noContent();
     }
 
     /**
@@ -46,6 +71,8 @@ class BranchController extends Controller
      */
     public function destroy(Branch $branch)
     {
-        //
+        $branch->delete();
+
+        return response()->noContent();
     }
 }

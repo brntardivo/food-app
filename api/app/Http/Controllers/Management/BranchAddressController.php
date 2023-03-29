@@ -3,50 +3,39 @@
 namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Management\StoreBranchAddressRequest;
 use App\Http\Requests\Management\UpdateBranchAddressRequest;
 use App\Models\Branch;
-use App\Models\BranchAddress;
 
 class BranchAddressController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index(Branch $branch)
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreBranchAddressRequest $request, Branch $branch)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      */
-    public function show(BranchAddress $branchAddress)
+    public function show(Branch $branch)
     {
-        //
+        $branch->load(['address']);
+
+        return response()->json([
+            'address' => $branch->address,
+        ], 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBranchAddressRequest $request, BranchAddress $branchAddress)
+    public function update(UpdateBranchAddressRequest $request, Branch $branch)
     {
-        //
-    }
+        $branch->load(['address']);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(BranchAddress $branchAddress)
-    {
-        //
+        $branch->address->address = $request->address;
+        $branch->address->complement = $request->complement;
+        $branch->address->zip_code = $request->zip_code;
+        $branch->address->district = $request->district;
+        $branch->address->city = $request->city;
+        $branch->address->state = $request->state;
+
+        $branch->address->save();
+
+        return response()->noContent();
     }
 }

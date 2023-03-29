@@ -27,7 +27,7 @@ Route::prefix('management')->group(function () {
 
     Route::middleware(['auth:user'])->group(function () {
         Route::apiResource('branches', BranchController::class);
-        Route::apiSingleton('branches.address', BranchAddressController::class)->creatable();
+        Route::apiSingleton('branches.address', BranchAddressController::class);
         Route::apiResource('branches.opening-hours', BranchOpeningHoursSettingController::class);
     });
 });

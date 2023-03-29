@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Management;
 
+use App\Rules\DocumentRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreBranchRequest extends FormRequest
@@ -11,7 +12,7 @@ class StoreBranchRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,10 @@ class StoreBranchRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required',
+            'trading_name' => 'required',
+            'company_name' => 'required',
+            'document' => ['required', 'string', 'unique:branches', new DocumentRule],
         ];
     }
 }
